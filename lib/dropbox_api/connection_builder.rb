@@ -9,9 +9,9 @@ module DropboxApi
     end
 
     def build(url)
-      Faraday.new(url) do |connection|
+      Faraday.new(url: url) do |connection|
         middleware.apply(connection) do
-          connection.authorization :Bearer, @oauth_bearer
+          connection.request :authorization, "Bearer", @oauth_bearer
 
           yield connection
         end
